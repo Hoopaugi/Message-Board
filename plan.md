@@ -14,6 +14,7 @@ Discussions happen in a pseudo anonymous way: commenting and creation of threads
 - How to implement pagination / thread archiving
 - Should thread bumping be weighted in some way? (OP can't bump, first comment by new user > another comment by already partisipating user)
 - How is userId tracked inside a thread?
+- Consolidate some of the API endpoints, for example POST /api/threads and POST /api/boards/:name/threads
 
 ## 2. Tech stack
 
@@ -83,17 +84,21 @@ After bob registers and account and logs in, he is able to start new threads on 
 
 ## 5. Backend
 
-RESTful json API
+RESTful json api
 
 |Method|Endpoint|Description|
 |-|-|-|
 |GET|/api/boards/|List of all boards|
 |GET|/api/boards/:name|Specific board|
-|GET|/api/boards/:name/threads|Threads started in a board|
+|GET|/api/boards/:name/threads|Threads started in that board|
 |POST|/api/boards/:name/threads|Start a new thread in a board|
 |GET|/api/boards/:name/comments|Comments left in a board|
 |GET|/api/threads/|List of all threads|
 |GET|/api/threads/:id|Specific thread|
+|POST|/api/threads/:id/comments|Leave a comment|
+|GET|/auth/me/|returns information related to the authorized user|
+|POST|/auth/login|Logs the user in|
+|POST|/auth/register|Registers a new user|
 
 ### GET /api/boards/
 
@@ -270,8 +275,29 @@ User id is based on the order of commenting users: When a user first comments on
 
 #### Frontpage
 
+- GET /api/boards/ to populate sidebar with a list of boards
+- GET /api/threads to pupulate the latest threads
+- GET /auth/me to pulate the stats in the sidebar
+- POST /auth/login when user logs in
+- POST /auth/register when user registers an account
+
+Links to threads are formatted as /api/threads/:id with the id from the threads array from the /api/threads request
+Links to boards are formatted as /api/boards/:name with name from the /api/boards request
+
 ![Frontpage](https://github.com/Hoopaugi/Message-Board/blob/main/images/Frontpage.png?raw=true)
 
 #### Board Page
 
+- GET /api/boards/:name to fetch that boards information, and to populate active threads
+- POST /api/boards:name/threads to start a new thread
+
+Links to threads are formatted as /api/threads/:id with the id from the threads array from the /api/boards:name request
+
+![Board page](https://github.com/Hoopaugi/Message-Board/blob/main/images/Board.png?raw=true)
+
 #### Thread Page
+
+- GET /api/threads/:id to fetch the thread and it's comments
+- POST /api/threads/:id/comments to leave a new comment
+
+![Thread page](https://github.com/Hoopaugi/Message-Board/blob/main/images/Thread.png?raw=true)
