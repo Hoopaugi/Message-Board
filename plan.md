@@ -23,6 +23,8 @@ Discussions happen in a pseudo anonymous way: commenting and creation of threads
 - What to do when an user navigates to a thread they have hidden.
 - Ability to follow threads. Would require the implementation of some sort of notification system
 - Ability for users to show their username attached to comments and threads. (Would go against the anonymous principle)
+- Document PUT and DELETE methods relating to updating and deleting threads and comments
+- How to keep track of which comments, threads and users the user has hidden. (Most likely something in the frontend)
 
 ## 2. Tech stack & Development practices
 
@@ -317,6 +319,8 @@ Response body:
 
 Request for receiving a authorization token
 
+The request should include an authorization header containing the users token
+
 Request body:
 
 ```JSON
@@ -338,6 +342,8 @@ Request response with valid credentials:
 #### POST /auth/register
 
 Request for registering a new user. Email is an optional parameter, which should still be included in the request, with it's value either being an email address, or null
+
+The request should include an authorization header containing the users token
 
 Request body:
 
