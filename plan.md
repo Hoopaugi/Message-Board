@@ -21,6 +21,8 @@ Discussions happen in a pseudo anonymous way: commenting and creation of threads
 - When new user is registered, should the response contain a token and log the user in automatically?
 - [x] with mongoose, created field for documents could just be replaced with the automatic createdAt timestamp
 - What to do when an user navigates to a thread they have hidden.
+- Ability to follow threads. Would require the implementation of some sort of notification system
+- Ability for users to show their username attached to comments and threads. (Would go against the anonymous principle)
 
 ## 2. Tech stack & Development practices
 
@@ -44,17 +46,28 @@ Bob visits the website and sees the frontpage with a sidebar containing a login 
 
 Bob is able to view the threads and comments, but without an account, he is unable to create new threads or to comment.
 
-After bob registers a new account and logs in, he is able to start new threads on the boards, and to leave comments.
+After bob registers a new account and logs in, he is able to start new threads on the boards, and to leave comments in threads.
 
 At this point, all content posted by users is text only.
 
-### 3.2 Phase 1 - Content moderation by the users
+#### Features
+
+- Frontpage, Board & Thread pages
+- User registration and authentication
+- Ability to leave comments and to create threads
+
+### 3.2 Phase 2 - Content moderation by the users
 
 Bob is able to edit and remove his own comments and threads. When a comment is removed, it's content is no longer shown to users, and is instead replaced with a message telling others that "the comment was removed by the user"
 
 When a thread is deleted, only the title and content of the thread are removed. Any comments on the thread will stay.
 
 Bob is able to hide threads, individual comments and comments by users in a thread. Hiding comments by an user is thread specific, and other comments made by the same user on other threads will be shown to Bob. The content of a hidden comment will be replaced with a text "Comment hidden by user". A hidden thread will have it's content and title replaced with a text "Hidden by user" on pages showing a slim version of a thread.
+
+#### Features
+
+- Users can delete their own comments and threads
+- Users can hide individual comments, comments by an user in a thread, and threads
 
 ## 4. Database 
 
@@ -105,7 +118,7 @@ Short descriptions of the database models and their fields
 
 ## 5. Backend
 
-### 5.1 /api
+### 5.1 /api endpoints
 
 Content related endpoints
 
@@ -275,7 +288,7 @@ Request body:
 }
 ```
 
-### 5.2 /auth
+### 5.2 /auth endpoints
 
 Authentication and user registration related endpoints
 
@@ -333,68 +346,6 @@ Request body:
   "username": "newuser",
   "password": "secret",
   "email": null
-}
-```
-
-### User object
-
-The user object should not be returned by the API outside of the representation for the authenticated user.
-
-### Board object
-
-Contains the name of the board, when it was created, an array of stripped down representations of threads.
-
-The thread objects contain only the thread id, it's title, when it was created, number of comments and the last comment made in it.
-
-```JSON
-{
-  "name": "random",
-  "created": "2011-10-05T14:48:00.000Z",
-  "threads": [
-    {
-      "id": "56cb91bdc3464f14678934ca",
-      "title": "Random thread",
-      "created": "2011-10-05T14:48:00.000Z",
-      "numComments": 3,
-      "latestComment": {
-        "id": "56cb91bdc3464f14678934ca",
-        "content": "Random comment",
-        "created": "2011-10-05T14:48:00.000Z"
-      }
-    }
-  ]
-}
-```
-
-### thread object
-
-Contains the thread id, title, when it was created and comments made in it.
-
-User id is based on the order of commenting users: When a user first comments on a thread, they get assigned a number based on the number of unique commentors. OP is always userId 0, with following commenters getting assigned numbers starting from 1
-
-```JSON
-{
-  "id": "56cb91bdc3464f14678934ca",
-  "title": "Random thread",
-  "created": "2011-10-05T14:48:00.000Z",
-  "comments": [
-    {
-      "id": "56cb91bdc3464f14678934ca",
-      "userId": 1,
-      "content": "Random comment",
-      "created": "2011-10-05T14:48:00.000Z"
-    }
-  ]
-}
-```
-
-### Comment object
-
-```JSON
-{
-  "id": "56cb91bdc3464f14678934ca",
-  "content": "Random comment",
-  "created": "2011-10-05T14:48:00.000Z"
 }
 ```
 
