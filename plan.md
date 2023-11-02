@@ -10,6 +10,8 @@ Discussions happen in a pseudo anonymous way: commenting and creation of threads
 
 ## 1. Questions, problems & notes
 
+These need to be split and organized better
+
 - Does a board need an ID or is the name enough
 - How to implement pagination / thread archiving
 - Should thread bumping be weighted in some way? (OP can't bump, first comment by new user > another comment by already partisipating user)
@@ -25,6 +27,18 @@ Discussions happen in a pseudo anonymous way: commenting and creation of threads
 - Ability for users to show their username attached to comments and threads. (Would go against the anonymous principle)
 - Document PUT and DELETE methods relating to updating and deleting threads and comments
 - How to keep track of which comments, threads and users the user has hidden. (Most likely something in the frontend)
+- Should threads and comments have a property indicating it's order by an incrementing number starting from 1
+- Should the above property be the document id?
+- Comment / thread posting options (Show username, show user role)
+- Some sort of log for moderator actions. (Publicly visible?)
+- Moderation actions (Banning, comment muting, thread muting)
+- Moderators can give warnings to users (Would require some sort of notification / direct messaging)
+- Tracking of how many times a thread has been viewed by users (Could play into bump order?)
+- Allow users to report things
+- Comment replying
+- If the site were to be actually hosted, monetization would have to be figured out to keep the lights on
+- Users should be able to share links to specific comments
+- Editing a comment or a thread should mark it in some way. Should edits be tracked?
 
 ## 2. Tech stack & Development practices
 
@@ -70,6 +84,27 @@ Bob is able to hide threads, individual comments and comments by users in a thre
 
 - Users can delete their own comments and threads
 - Users can hide individual comments, comments by an user in a thread, and threads
+
+### 3.x Phase x - Content moderation by staff
+
+There is going to be some content that has to be scrubbed by dedicated janitors to avoid the hosting company getting raided. This is true even with just text content. In the future if multimedia content support is added, this is going to be come even more important, so laying a solid foundation for these systems should happen relatively early in the decelopment process.
+
+Bill is a frequent user of the website and is deemed to act in good faith in the discussions he partakes in. He gets "hired" as a janny (he does it for free) for the website and gets granted the role of a moderator. This allows Bill to remove comments and threads he deems to go against the TOS. He is the judge, Jury and executioner of this little corner of the internet.
+
+Comments and threads removed by a moderator should display a seperate text from the usual deletion notice by the owner.
+
+### 3.y Phase y - Quality of life inprovements
+
+When logged in, bob is allowed to follow threads so he will be notified when a new comment is left in the thread.
+
+- User notification system
+- Thread following
+- Comment and thread editing. 
+
+#### Features
+
+- User roles. 
+- Ability for staff members to remove comments and threads
 
 ## 4. Database 
 
