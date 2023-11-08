@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { Router } from "express"
 
-import healthHandlers from "./health.handlers";
+import healthHandlers from "./health.handlers"
 
 const router = Router()
 

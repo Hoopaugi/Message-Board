@@ -1,8 +1,8 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express'
 
-import apiRouter from './api';
+import apiRouter from './api'
 
-const app: Express = express();
+const app: Express = express()
 
 app.use('/api', apiRouter)
 
