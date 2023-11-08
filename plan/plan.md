@@ -405,7 +405,7 @@ Request body:
 Links to threads are formatted as /api/threads/:id with the id from the threads array from the /api/threads request
 Links to boards are formatted as /api/boards/:name with name from the /api/boards request
 
-![Frontpage](https://github.com/Hoopaugi/Message-Board/blob/main/images/Frontpage.png?raw=true)
+![Frontpage](https://github.com/Hoopaugi/Message-Board/blob/main/plan/images/Frontpage.png?raw=true)
 
 #### Board Page
 
@@ -414,11 +414,11 @@ Links to boards are formatted as /api/boards/:name with name from the /api/board
 
 Links to threads are formatted as /api/threads/:id with the id from the threads array from the /api/boards:name request
 
-![Board page](https://github.com/Hoopaugi/Message-Board/blob/main/images/Board.png?raw=true)
+![Board page](https://github.com/Hoopaugi/Message-Board/blob/main/plan/images/Board.png?raw=true)
 
 #### Thread Page
 
 - GET /api/threads/:id to fetch the thread and it's comments
 - POST /api/threads/:id/comments to leave a new comment
 
-![Thread page](https://github.com/Hoopaugi/Message-Board/blob/main/images/Thread.png?raw=true)
+![Thread page](https://github.com/Hoopaugi/Message-Board/blob/main/plan/images/Thread.png?raw=true)
