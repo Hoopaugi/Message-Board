@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-const pong = (req: Request, res: Response) => {
+const ping = (req: Request, res: Response) => {
   res.send('pong')
 }
 
-export default { pong }
+export default { ping }
