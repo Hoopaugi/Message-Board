@@ -111,6 +111,8 @@ When logged in, bob is allowed to follow threads so he will be notified when a n
 - Dates are ISO formatted dates stored as strings.
 - ids are mongoose objectids stored as strings
 - automatic timestamps "createdAt" and "updatedAt" are enabled for all models, and formatted as "created" and "edited" on API requests as needed. For the user document, "createdAt" is formatted as "registered"
+- fields are in camel case
+- Every model has an id field of a mongoose objectid type
 
 ### 4.1 Models
 
@@ -120,10 +122,9 @@ Short descriptions of the database models and their fields
 
 |Field|Type|Optional|Description|
 |-|-|-|-|
-|id|string||ID of the user|
 |username|string||Username chosen by the user|
 |email|string|X|Optional email address used for password recovery|
-|password_hash|string||hashed user chosen password|
+|passwordHash|string||Hashed user chosen password|
 |threads|Thread[]||Threads the user has started|
 |comments|Comment[]||Comments the user has left|
 
@@ -138,20 +139,18 @@ Short descriptions of the database models and their fields
 
 |Field|Type|Description|
 |-|-|-|
-|id|string|ID of the thread|
 |title|string|Title of the thread|
 |content|string|Text content of the thread|
 |user|User|User who started the thread|
-|boardName|string|Name of the board the thread was made in|
+|board|Board|Board the thread was made in|
 
 #### Comment
 
 |Field|Type|Description|
 |-|-|-|
-|id|string|ID of the comment|
 |content|string|Text content of the comment|
 |user|User|User who left the comment|
-|threadId|string|ID of the thread the comment was left in|
+|thread|Thread|Thread the comment was left in|
 
 ## 5. Backend
 
@@ -251,7 +250,9 @@ Returns an array Thread objects across all boards, containing the title, content
     "id": "56cb91bdc3464f14678934ca",
     "title": "Random thread",
     "content": "A random thread on the random board",
-    "boardName": "random",
+    "board": {
+      "name": "random"
+    },
     "created": "2011-10-05T14:48:00.000Z",
     "numComments": 3,
     "numCommentors": 2,
@@ -265,7 +266,9 @@ Returns an array Thread objects across all boards, containing the title, content
     "id": "56cb91bdc3464f14678934ca",
     "title": "Another thread",
     "content": "A thread about music",
-    "boardName": "music",
+    "board": {
+      "name": "random"
+    },
     "created": "2011-10-05T14:48:00.000Z",
     "numComments": 0,
     "numCommentors": 1,
