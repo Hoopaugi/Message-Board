@@ -8,7 +8,14 @@ const threadSchema = new Schema<IThread>({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   board: { type: Schema.Types.ObjectId, ref: 'Board' },
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    transform: (doc, ret) => {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+    }
+  }
 })
 
 const Thread = model<IThread>('Thread', threadSchema)

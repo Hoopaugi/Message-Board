@@ -9,7 +9,7 @@
     "build": "npx tsc --project tsconfig.build.json",
     "start:prod": "node dist/index.js",
     "start:dev": "concurrently \"npx tsc --watch --project tsconfig.build.json\" \"nodemon -q dist/index.js\"",
-    "test": "jest --coverage --verbose"
+    "test": "jest --coverage --verbose --runInBand"
   },
   "keywords": [],
   "author": "",

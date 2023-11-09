@@ -5,4 +5,6 @@ export interface Thread {
   content: string
   user: Types.ObjectId
   board: Types.ObjectId
+  createdAt: Date
+  updatedAt: Date
 }
