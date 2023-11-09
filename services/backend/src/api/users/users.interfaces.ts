@@ -6,4 +6,6 @@ export interface User {
   passwordHash: string
   threads: Types.ObjectId[]
   comments: Types.ObjectId[]
+  createdAt: Date
+  updatedAt: Date
 }
