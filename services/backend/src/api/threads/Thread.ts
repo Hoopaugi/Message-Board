@@ -7,6 +7,8 @@ const threadSchema = new Schema<IThread>({
   content: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   board: { type: Schema.Types.ObjectId, ref: 'Board' },
+}, {
+  timestamps: true
 })
 
 const Thread = model<IThread>('Thread', threadSchema)

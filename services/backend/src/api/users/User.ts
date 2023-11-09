@@ -8,6 +8,8 @@ const userSchema = new Schema<IUser>({
   passwordHash: { type: String, required: true },
   threads: [{ type: Schema.Types.ObjectId, ref: 'Thread' }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+}, {
+  timestamps: true
 })
 
 const User = model<IUser>('User', userSchema)

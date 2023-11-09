@@ -6,6 +6,8 @@ const commentSchema = new Schema<IComment>({
   content: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   thread: { type: Schema.Types.ObjectId, ref: 'Thread' }
+}, {
+  timestamps: true
 })
 
 const Comment = model<IComment>('Comment', commentSchema)
