@@ -6,7 +6,14 @@ const boardSchema = new Schema<IBoard>({
   name: { type: String, required: true },
   threads: [{ type: Schema.Types.ObjectId, ref: 'Thread' }]
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    transform: (doc, ret) => {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+    }
+  }
 })
 
 const Board = model<IBoard>('Board', boardSchema)

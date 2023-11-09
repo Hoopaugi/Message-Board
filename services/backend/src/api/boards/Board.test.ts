@@ -24,4 +24,16 @@ describe("Board Model", () => {
     expect(board.createdAt).toBeDefined()
     expect(board.updatedAt).toBeDefined()
   })
+
+  test("JSON representation has right properties", async () => {
+    const boardData = {
+      name: 'test'
+    }
+
+    const board = await Board.create(boardData)
+
+    const json = board.toJSON()
+
+    expect(Object.keys(json)).toStrictEqual([ 'name', 'threads', 'createdAt', 'updatedAt', 'id' ])
+  })
 })
