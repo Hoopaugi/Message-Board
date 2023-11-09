@@ -7,7 +7,14 @@ const commentSchema = new Schema<IComment>({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   thread: { type: Schema.Types.ObjectId, ref: 'Thread' }
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    transform: (doc, ret) => {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+    }
+  }
 })
 
 const Comment = model<IComment>('Comment', commentSchema)
