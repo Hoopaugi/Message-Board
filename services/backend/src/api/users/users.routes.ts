@@ -1,9 +1,9 @@
 import { Router } from "express"
 
-import handlers from "./health.handlers"
+import handlers from "./users.handlers"
 
 const router = Router()
 
-router.get('/', handlers.ping)
+router.post('/', handlers.create)
 
 export default router

@@ -9,7 +9,15 @@ const userSchema = new Schema<IUser>({
   threads: [{ type: Schema.Types.ObjectId, ref: 'Thread' }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 }, {
-  timestamps: true
+  timestamps: true,
+  toJSON: {
+    transform: (doc, ret) => {
+      ret.id = ret._id
+      delete ret.passwordHash
+      delete ret._id
+      delete ret.__v
+    }
+  }
 })
 
 const User = model<IUser>('User', userSchema)
