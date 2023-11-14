@@ -9,7 +9,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
     const user = await services.create(newUser)
   
-    res.json(user)
+    res.status(201).json(user)
   } catch (error) {
     next(error)
   }
