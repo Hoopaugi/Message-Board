@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express"
 import { NODE_ENV } from "./config"
 import { AppError } from "./utils"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
     res.status(error.statusCode).send({ message: error.message })
